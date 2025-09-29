@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,3 +17,17 @@ jobs:
     steps:
       - name: Ejecutar tests
         run: echo "Ejecutando tests..."
+
+  package:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Empaquetar artefactos
+        run: echo "Empaquetando aplicación..."
+
+  deploy:
+    needs: package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Desplegar aplicación
+        run: echo "Desplegando en producción..."
